@@ -12,7 +12,7 @@ node_t  *list_create(void *data)
 
 void    list_destroy(node_t **head, void (*fp)(void *data))
 {
-  free(*head);
+  fp(*head);
 }
 
 void    list_push(node_t *head, void *data)
