@@ -41,13 +41,45 @@ void    print_node(node_t *node)
     }
 }
 
-void    visit_tree(node_t *node, void (*fp)(node_t *root))
+void 		visit_tree(node_t *node, void (*fp)(node_t *root))
 {
-  fp(node);
+  	if(node->right != NULL)
+  	{
+    		if(node->left != NULL)
+    		{
+      			visit_tree(node->left, fp);
+      			visit_tree(node->right, fp);
+    		}
+    		else
+    		{
+        		visit_tree(node->right, fp);
+    		}
+  	}
+  	else
+  	{
+    		if(node->left != NULL)
+    		{
+      			visit_tree(node->left, fp);
+    		}
+  	}
+  	fp(node);
 }
 
-void    destroy_tree(node_t *node, void (*fdestroy)(node_t *root))
+void 		destroy_tree(node_t *node, void (*fdestroy)(node_t *root))
 {
-  fdestroy(node);
-}
+  	if(node->right != NULL)
+  	{
+    		if(node->left != NULL)
+    		{
+      			destroy_tree(node->left, fdestroy);
+      			destroy_tree(node->right, fdestroy);
+    		}
+    		else destroy_tree(node->right, fdestroy);	
+  	}
 
+  	else
+  	 if(node->left != NULL)
+        destroy_tree(node->left, fdestroy);
+	fdestroy(node);
+	free(node);
+}
