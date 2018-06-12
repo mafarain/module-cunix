@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 
-node_t  *allocnode(){
+node_t  *allocnode()
+{
   node_t *head = (node_t *) malloc(sizeof(node_t));
   head->left = NULL;
   head->right = NULL;
