@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 
-node_t  *allocnode(){
+node_t  *allocnode()
+{
   node_t *head = (node_t *) malloc(sizeof(node_t));
   head->left = NULL;
   head->right = NULL;
@@ -50,18 +51,13 @@ void 		visit_tree(node_t *node, void (*fp)(node_t *root))
       			visit_tree(node->left, fp);
       			visit_tree(node->right, fp);
     		}
-    		else
-    		{
-        		visit_tree(node->right, fp);
-    		}
+    		else		visit_tree(node->right, fp);
+    		
   	}
   	else
-  	{
-    		if(node->left != NULL)
-    		{
-      			visit_tree(node->left, fp);
-    		}
-  	}
+  		if(node->left != NULL)
+    			visit_tree(node->left, fp);
+    		
   	fp(node);
 }
 
